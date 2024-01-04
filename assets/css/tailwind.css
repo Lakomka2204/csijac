@@ -11,7 +11,3 @@ body {
 #__nuxt {
     @apply flex flex-col w-full h-full;
 }
-@font-face {
-    font-family: 'flags';
-    src: url("@/assets/fonts/flags.ttf");
-}

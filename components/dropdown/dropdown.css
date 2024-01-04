@@ -1,0 +1,29 @@
+@import '@/assets/css/tailwind.css';
+
+@layer components {
+    .dropdown-wrapper {
+        @apply relative inline-block
+            cursor-pointer;
+    }
+    .dd-appear-below {
+        @apply top-full mt-4 right-0;
+    }
+    .dd-appear-left {
+        @apply right-full mr-4 top-0;
+    }
+    .dd-appear-right {
+        @apply left-full ml-4 top-0;
+    }
+    .dd-appear-top {
+        @apply bottom-full mb-4 left-0;
+    }
+    .dropdown-list {
+        @apply absolute 
+        p-1 border z-50 w-full min-w-max
+        border-black dark:border-white
+        bg-gray-300 dark:bg-gray-900
+        rounded-md shadow-md flex flex-col
+        justify-center
+        cursor-default;
+    }
+}

@@ -21,29 +21,43 @@
             </ul>
         </nav>
     </header>
-        <main>
-            <slot />
-        </main>
+    <main>
+        <slot />
+    </main>
 
-        <footer>
-            <ul>
-                <li class="settings">
-                    <div @click="s">
-                        <img src="@/assets/svg/sun.svg" class="ic hidden dark:block"/>
-                        <img src="@/assets/svg/moon.svg" class="ic block dark:hidden"/>
-                    </div>
-                    <div>
-                        <span class="cfc">
-                            0
-                        </span>
-                    </div>
-                </li>
-            </ul>
-        </footer>
+    <footer>
+        <ul>
+            <li @click="s" class="theme">
+                <div>
+                    <img src="@/assets/svg/sun.svg" class="ic hidden dark:block" />
+                    <img src="@/assets/svg/moon.svg" class="ic block dark:hidden" />
+                </div>
+            </li>
+            <li>
+                <Dropdown appearance="top">
+                    <template #button="{ onClick }">
+                        <img @click="onClick" :src="getFlag(locale)" />
+                    </template>
+                    <template #dropdown="{onClick}">
+            <li v-for="lcl in availableLocales" class="selopt"
+            @click="() => {onClick(); changeLang(lcl)}">
+                <img :src="getFlag(lcl)" />
+                <span>{{ lcl }}</span>
+            </li>
+            </template>
+            </Dropdown>
+            </li>
+        </ul>
+    </footer>
 </template>
 
 <script lang="ts" setup>
-function s(){
+import getFlag from '@/utils/getFlag';
+const { locale, availableLocales } = useI18n();
+function changeLang(code : string) {
+    //todo this
+}
+function s() {
     if (document.documentElement.classList.contains("dark")) {
         document.documentElement.classList.remove("dark")
         document.documentElement.classList.add("light")

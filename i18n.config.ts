@@ -1,8 +1,8 @@
 export default defineI18nConfig(async () => ({
   legacy: false,
-  locale: 'en',
+  locale: 'us',
   messages: {
-    en: await import("./lang/en.json"),
+    us: await import("./lang/us.json"),
     ru: await import("./lang/ru.json")
   }
 }))

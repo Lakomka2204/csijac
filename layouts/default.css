@@ -20,22 +20,23 @@
     }
     footer {
         @apply bg-gray-100 dark:bg-gray-900;
-        ul {
+        &>ul {
             @apply mx-auto container
             flex flex-row items-center p-1;
+            & > li {
+                @apply flex flex-row items-center
+                 mx-2 m-1;
+            }
         }
     }
-    .settings {
-        @apply border rounded-2xl p-1
-        border-black dark:border-white
-        flex flex-row items-center;
-        & > div {
-            @apply cursor-pointer mx-2 ;
+    .selopt {
+        @apply flex flex-row items-center m-1;
+        &>* {
+            @apply m-1;
         }
-        .cfc {
-            font-family: flags;
-            @apply text-2xl;
-        }
+    }
+    .theme {
+        @apply cursor-pointer;
     }
     .ic {
         @apply invert-0 dark:invert
