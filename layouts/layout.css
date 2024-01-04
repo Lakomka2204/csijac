@@ -1,0 +1,13 @@
+@import url("@/assets/css/tailwind.css");
+
+@layer components {
+    nav {
+        @apply flex-1 flex-col;
+        & > ul {
+            @apply flex flex-row;
+        }
+        & > a  {
+            @apply text-2xl
+        }
+    }
+}
