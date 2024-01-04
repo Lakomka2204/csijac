@@ -1,0 +1,67 @@
+@import url("@/assets/css/tailwind.css");
+
+@layer components {
+    nav {
+        @apply p-1 bg-gray-100 dark:bg-gray-900
+        flex-grow-0;
+        ul {
+            @apply flex flex-row
+            container mx-auto
+            items-center;
+            
+            li:first-child {
+                @apply flex-grow;
+            }
+        }
+    }
+    main {
+        @apply container mx-auto
+        flex-grow w-full h-full;
+    }
+    footer {
+        @apply bg-gray-100 dark:bg-gray-900;
+        ul {
+            @apply mx-auto container
+            flex flex-row items-center p-1;
+        }
+    }
+    .settings {
+        @apply border rounded-2xl p-1
+        border-black dark:border-white
+        flex flex-row items-center;
+        & > div {
+            @apply cursor-pointer mx-2 ;
+        }
+        .cfc {
+            font-family: flags;
+            @apply text-2xl;
+        }
+    }
+    .ic {
+        @apply invert-0 dark:invert
+        w-8 h-8;
+    }
+    .logo {
+        @apply text-3xl font-semibold
+        text-transparent bg-clip-text
+        bg-gradient-to-r from-violet-500
+        transition-colors duration-500
+        to-blue-500;
+        &>span {
+            @apply inline-block max-w-0
+            opacity-0
+            transition-[max-width,opacity]
+            duration-500
+            text-base 
+            m-0 p-0
+            origin-left
+            delay-0;
+        }
+        &:hover {
+            @apply to-blue-500 from-red-500;
+            &>span {
+                @apply max-w-[70px] opacity-100;
+            }
+        }
+    }
+}

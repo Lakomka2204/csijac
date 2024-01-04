@@ -1,0 +1,10 @@
+@import url("@/assets/css/tailwind.css");
+
+@layer components {
+    .m {
+        @apply w-full h-full flex items-center justify-center;
+        span {
+            @apply text-5xl text-center;
+        }
+    }
+}

@@ -1,3 +1,17 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body {
+    @apply w-screen h-screen
+    bg-gray-50 dark:bg-gray-950
+    text-black dark:text-white;
+}
+
+#__nuxt {
+    @apply flex flex-col w-full h-full;
+}
+@font-face {
+    font-family: 'flags';
+    src: url("@/assets/fonts/flags.ttf");
+}
