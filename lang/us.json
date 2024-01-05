@@ -1,5 +1,6 @@
 {
-    "nav": {
-        "login":"Login"
-    }
+    "login": "Login",
+    "ru":"russian",
+    "us":"English",
+    "jp":"Japanese"
 }

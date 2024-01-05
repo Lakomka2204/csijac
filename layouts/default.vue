@@ -16,7 +16,7 @@
                     </NuxtLink>
                 </li>
                 <li>
-                    <NuxtLink to="/login">{{ $t("nav.login") }}</NuxtLink>
+                    <NuxtLink to="/login">{{ $t("login") }}</NuxtLink>
                 </li>
             </ul>
         </nav>
@@ -27,7 +27,7 @@
 
     <footer>
         <ul>
-            <li @click="s" class="theme">
+            <li @click="changeTheme" class="theme">
                 <div>
                     <img src="@/assets/svg/sun.svg" class="ic hidden dark:block" />
                     <img src="@/assets/svg/moon.svg" class="ic block dark:hidden" />
@@ -42,7 +42,7 @@
             <li v-for="lcl in availableLocales" class="selopt"
             @click="() => {onClick(); changeLang(lcl)}">
                 <img :src="getFlag(lcl)" />
-                <span>{{ lcl }}</span>
+                <span>{{ $t(lcl) }}</span>
             </li>
             </template>
             </Dropdown>
@@ -54,18 +54,18 @@
 <script lang="ts" setup>
 import getFlag from '@/utils/getFlag';
 const { locale, availableLocales } = useI18n();
+const settingsStore = useSettingsStore();
+onMounted(() => {
+    settingsStore.init();
+})
 function changeLang(code : string) {
-    //todo this
+    settingsStore.toggleLanguage(code);
 }
-function s() {
-    if (document.documentElement.classList.contains("dark")) {
-        document.documentElement.classList.remove("dark")
-        document.documentElement.classList.add("light")
-    }
-    else {
-        document.documentElement.classList.remove("light")
-        document.documentElement.classList.add("dark")
-    }
+function changeTheme() {
+    if (settingsStore.theme == "dark")
+        settingsStore.toggleTheme("light")
+    else
+        settingsStore.toggleTheme("dark");
 }
 </script>
 

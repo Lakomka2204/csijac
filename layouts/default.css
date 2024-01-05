@@ -22,10 +22,11 @@
         @apply bg-gray-100 dark:bg-gray-900;
         &>ul {
             @apply mx-auto container
-            flex flex-row items-center p-1;
+            flex flex-row items-stretch;
             & > li {
                 @apply flex flex-row items-center
-                 mx-2 m-1;
+                 px-2 p-1 hover:bg-gray-400
+                 dark:hover:bg-gray-700 m-0;
             }
         }
     }
@@ -59,7 +60,7 @@
             delay-0;
         }
         &:hover {
-            @apply to-blue-500 from-red-500;
+            @apply to-violet-500 from-red-500;
             &>span {
                 @apply max-w-[70px] opacity-100;
             }

@@ -21,7 +21,7 @@
         @apply absolute 
         p-1 border z-50 w-full min-w-max
         border-black dark:border-white
-        bg-gray-300 dark:bg-gray-900
+        bg-gray-200 dark:bg-gray-900
         rounded-md shadow-md flex flex-col
         justify-center
         cursor-default;
