@@ -29,20 +29,20 @@
         <ul>
             <li @click="changeTheme" class="theme">
                 <div>
-                    <img src="@/assets/svg/sun.svg" class="ic hidden dark:block" />
-                    <img src="@/assets/svg/moon.svg" class="ic block dark:hidden" />
+                    <img src="@/assets/svg/sun.svg" alt="light" class="ic hidden dark:block" />
+                    <img src="@/assets/svg/moon.svg" alt="dark" class="ic block dark:hidden" />
                 </div>
             </li>
             <li>
                 <Dropdown appearance="top">
                     <template #button="{ onClick }">
-                        <img @click="onClick" :src="getFlag(locale)" />
+                        <img @click="onClick" :src="getFlag(currentLocale.iso)" :alt="currentLocale.code" />
                     </template>
                     <template #dropdown="{onClick}">
             <li v-for="lcl in availableLocales" class="selopt"
-            @click="() => {onClick(); changeLang(lcl)}">
-                <img :src="getFlag(lcl)" />
-                <span>{{ $t(lcl) }}</span>
+            @click="() => {onClick(); changeLang(lcl.code)}">
+                <img :src="getFlag(lcl.iso)" :alt="lcl.code" />
+                <span>{{ lcl.name }}</span>
             </li>
             </template>
             </Dropdown>
@@ -53,12 +53,15 @@
 
 <script lang="ts" setup>
 import getFlag from '@/utils/getFlag';
-const { locale, availableLocales } = useI18n();
+import type { LocaleObject } from '@nuxtjs/i18n/dist/runtime/composables';
+const { locale, locales } = useI18n();
+const availableLocales = computed(() => locales.value as LocaleObject[]);
+const currentLocale = computed(() => availableLocales.value.filter(x => x.code == locale.value)[0]);
 const settingsStore = useSettingsStore();
 onMounted(() => {
     settingsStore.init();
 })
-function changeLang(code : string) {
+function changeLang(code : string | undefined) {
     settingsStore.toggleLanguage(code);
 }
 function changeTheme() {

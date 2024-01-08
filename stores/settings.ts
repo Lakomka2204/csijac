@@ -1,11 +1,14 @@
 import { defineStore } from "pinia";
 import { useLocalStorage } from "@vueuse/core";
 export const useSettingsStore = defineStore("settings", () => {
-  const _theme = useLocalStorage("theme", "light");
-  const _locale = useLocalStorage("locale", useBrowserLocale());
-
   const { locale: sysLocale } = useI18n({ useScope: "global" });
-
+  const _theme = useLocalStorage("theme", "light");
+  let defaultLocale;
+  if (process.client)
+    defaultLocale = useBrowserLocale();
+  else
+    defaultLocale = sysLocale.value;
+  const _locale = useLocalStorage("locale", defaultLocale);
   const theme = computed(() => _theme.value);
   const locale = computed(() => _locale.value);
   function changeTheme(oldT:string,newT:string) {
@@ -17,7 +20,8 @@ export const useSettingsStore = defineStore("settings", () => {
     changeTheme(theme.value,newTheme);
     _theme.value = newTheme;
   }
-  function toggleLanguage(newLang: string) {
+  function toggleLanguage(newLang: string | undefined) {
+    if (!newLang) return;
     if (locale.value == newLang) return;
     sysLocale.value = _locale.value = newLang;
   }

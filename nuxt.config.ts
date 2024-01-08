@@ -9,12 +9,30 @@ export default defineNuxtConfig({
   ],
   i18n:{
     vueI18n: "./i18n.config.ts",
-    detectBrowserLanguage: {
-      useCookie: true,
-      cookieKey: "lcl_redirected",
-      alwaysRedirect: true,
-      redirectOn: 'root'
-    }
+    langDir:'lang',
+    strategy:"prefix_except_default",
+    locales:[
+      {
+        code:"en-US",
+        iso:"us",
+        file:"us.json",
+        name:"English",
+        isCatchallLocale:true,
+      },
+      {
+        code:"ru-RU",
+        iso:"ru",
+        file:"ru.json",
+        name:"русский",
+      },
+      {
+        code:"ja-JP",
+        iso:"jp",
+        file:"jp.json",
+        name:"日本語"
+      }
+    ],
+    defaultLocale:'en-US'
   },
   pages: true,
   pinia: {
