@@ -16,6 +16,10 @@
     <div v-if="status == 'success'" class="text-green-500">Login success</div>
     <input type="submit" value="Login" :disabled="pending"/>
   </form>
+  <button @click="database.execute">Get users looooooooooool // Status {{ database.status }}</button>
+  <div>
+    {{database.data}}
+  </div>
 </template>
 <script lang="ts" setup>
 const usr = ref('');
@@ -26,6 +30,7 @@ const loginBody = computed(() => encodeResponse({
 }))
 const {csrf} = useCsrf();
 const pending = computed(() => status.value == "pending");
+const database = useFetch('/api/getusers',{immediate:false,headers:{'csrf-token':csrf}});
 const {execute, error, status} = useFetch('/api/auth',{
   body: loginBody,
   method:"POST",

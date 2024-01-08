@@ -41,5 +41,8 @@ export default defineNuxtConfig({
   csurf:{
     methodsToProtect: ['POST',"PUT","PATCH","DELETE"],
     cookieKey:"csrf",
-  }
+  },
+  plugins:[
+    // '~/plugins/db.ts'
+  ]
 })
