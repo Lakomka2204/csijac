@@ -19,7 +19,7 @@ export default function encodeResponse(data: object) {
       valueA.localeCompare(valueB)
     )
   );
-
+  console.log(data,'> to >',sortedData);
   return sortedData;
 }
 

@@ -1,39 +1,51 @@
 <template>
-  <form @submit.prevent="async () => await execute()">
-
+  <form @submit.prevent="async () => await loginFetch.execute()">
     <input
     placeholder="usr"
-    v-model="usr"
+    v-model="loginBody.username"
     type="text"
-    :disabled="pending"/>
+    :disabled="loginPending"/>
     <br>
-    <input placeholder="pass" v-model="pass" type="text"
-    :disabled="pending"/>
-    <input id="log" type="radio" v-model="method" value="0"/>
-    <label for="log">Login</label>
-    <input id="reg" type="radio" v-model="method" value="1"/>
-    <label for="reg">Register</label>
+    <input placeholder="pass" v-model="loginBody.password" type="password"
+    :disabled="loginPending"/>
     <br>
     <div class="text-rose-500">
-      {{ error?.statusMessage }}
+      {{ loginFetch.error.value?.statusMessage }}
     </div>
-    <div v-if="status == 'success'" class="text-green-500">Login success</div>
-    <input type="submit" value="Login" :disabled="pending"/>
+    <div v-if="loginFetch.status.value == 'success'" class="text-green-500">Login success</div>
+    <input type="submit" value="Login" :disabled="loginPending"/>
   </form>
+  <!-- <form @submit.prevent="async () => await auth.register()">
+    <input
+    placeholder="usr"
+    v-model="auth.username"
+    type="text"/>
+    <br>
+    <input placeholder="pass" v-model="auth.password" type="password"/>
+    <br>
+    <div class="text-rose-500">
+     {{ auth.error.value?.statusMessage }} 
+    </div>
+     <div v-if="regFetch.status.value == 'success'" class="text-green-500">Register success</div>
+    <input type="submit" value="Register" />
+  </form> -->
+  <button @click="logout">LOGOUT</button>
 </template>
 <script lang="ts" setup>
-const usr = ref('');
-const pass = ref('');
-const method = ref('');
-const loginBody = computed(() => encodeResponse({
-  username: usr.value,
-  password: pass.value,
-  method: method.value
-}));
+const A1 = useCookie("A1");
+function logout() {
+  console.log('called logout');
+  A1.value = null;
+}
+const loginBody = reactive({
+  username:'',
+  password:''
+});
+const logEncBody = computed(() => encodeResponse(loginBody));
+
 const {csrf} = useCsrf();
-const pending = computed(() => status.value == "pending");
-const {execute, error, status} = useFetch('/api/auth/authenticate',{
-  body: loginBody,
+const loginFetch = useFetch('/api/auth/login',{
+  body: logEncBody,
   method:"POST",
   immediate:false,
   watch:false,
@@ -41,6 +53,8 @@ const {execute, error, status} = useFetch('/api/auth/authenticate',{
     "csrf-token":csrf
   }
 });
+const loginPending = computed(() => loginFetch.status.value == "pending");
+
 
 </script>
 <style scoped src="./index.css"/>

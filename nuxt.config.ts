@@ -10,7 +10,7 @@ export default defineNuxtConfig({
   i18n:{
     vueI18n: "./i18n.config.ts",
     langDir:'lang',
-    strategy:"prefix_except_default",
+    strategy:"no_prefix",
     locales:[
       {
         code:"en-US",
@@ -42,7 +42,7 @@ export default defineNuxtConfig({
     methodsToProtect: ['POST',"PUT","PATCH","DELETE"],
     cookieKey:"csrf",
   },
-  plugins:[
-    // '~/plugins/db.ts'
-  ]
+  tailwindcss:{
+    viewer:false
+  }
 })

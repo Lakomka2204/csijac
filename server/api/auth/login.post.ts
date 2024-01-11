@@ -1,6 +1,4 @@
-import getPGClient from "~/server/databases/db";
-import { login } from "~/server/utils/auth";
-import decodeResponse from "~/utils/decodeResponse";
+import decodeResponse from '@/utils/decodeResponse';
 /*
 {
   username : str 0 - 32
@@ -18,6 +16,8 @@ export default defineEventHandler(async (event) => {
     !dec?.password
   )
     return setResponseStatus(event, 400, "noProp");
+  if (dec.username.length > 32 || dec.password.length > 32)
+    return setResponseStatus(event,400,"propLength");
   const reqIp = getRequestIP(event, { xForwardedFor: true });
   if (!reqIp)
     return setResponseStatus(event,400,"Bruhh nigga where yo IP address go issue yourself a new one");
