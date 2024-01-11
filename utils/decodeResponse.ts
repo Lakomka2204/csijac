@@ -8,7 +8,6 @@ export default function decodeResponse(data: Record<string, string>) {
     decArr[index] = val;
   }
   const base = decArr.join("");
-  console.log('BASE',base);
   let json;
   if (process.client) json = atob(base);
   else json = Buffer.from(base, "base64").toString("utf-8");

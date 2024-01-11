@@ -15,20 +15,6 @@
     <div v-if="loginFetch.status.value == 'success'" class="text-green-500">Login success</div>
     <input type="submit" value="Login" :disabled="loginPending"/>
   </form>
-  <!-- <form @submit.prevent="async () => await auth.register()">
-    <input
-    placeholder="usr"
-    v-model="auth.username"
-    type="text"/>
-    <br>
-    <input placeholder="pass" v-model="auth.password" type="password"/>
-    <br>
-    <div class="text-rose-500">
-     {{ auth.error.value?.statusMessage }} 
-    </div>
-     <div v-if="regFetch.status.value == 'success'" class="text-green-500">Register success</div>
-    <input type="submit" value="Register" />
-  </form> -->
   <button @click="logout">LOGOUT</button>
 </template>
 <script lang="ts" setup>
@@ -57,4 +43,4 @@ const loginPending = computed(() => loginFetch.status.value == "pending");
 
 
 </script>
-<style scoped src="./index.css"/>
+<style scoped src="../index.css"/>

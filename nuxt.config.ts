@@ -1,4 +1,5 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
+import io from "./io.config"
 export default defineNuxtConfig({
   devtools: { enabled: true },
   modules: [
@@ -6,6 +7,7 @@ export default defineNuxtConfig({
     '@nuxtjs/i18n',
     'nuxt-csurf',
     '@pinia/nuxt',
+    'nuxt-socket-io'
   ],
   i18n:{
     vueI18n: "./i18n.config.ts",
@@ -34,6 +36,7 @@ export default defineNuxtConfig({
     ],
     defaultLocale:'en-US'
   },
+  io,
   pages: true,
   pinia: {
     storesDirs: ['./stores/**'],

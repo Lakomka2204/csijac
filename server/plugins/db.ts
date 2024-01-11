@@ -10,7 +10,7 @@ const pool = new pg.Pool({
     
 })
 
-export async function withPG<T>(func: (dbClient: pg.PoolClient) => T) {
+export async function withPG<T>(func: (dbClient: pg.PoolClient) => Promise<T>) {
     const client = await pool.connect() // get new client from pool
     const result = func(client);
     client.release()
@@ -19,7 +19,7 @@ export async function withPG<T>(func: (dbClient: pg.PoolClient) => T) {
 
 export default defineNitroPlugin(async (nitro) => {
 
-    await pool.connect().then((value : pg.PoolClient) => {
+    await pool.connect().then(() => {
         console.log("Postgres connection established");
     })
 
